@@ -1,6 +1,9 @@
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class Main extends PApplet {
+
+    Ball ball;
 
     public static void main(String[] args) {
         PApplet.main("Main");
@@ -11,10 +14,15 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        Ball ball = new Ball(this);
+        ball = new Ball(this);
+        ball.display();
     }
 
     public void draw() {
 
+        background(230,230,250);
+
+        ball.update();
+        ball.display();
     }
 }
