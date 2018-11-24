@@ -12,7 +12,7 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        
+        Ball ball = new Ball(this);
     }
 
     public void draw() {
