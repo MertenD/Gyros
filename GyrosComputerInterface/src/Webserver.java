@@ -1,4 +1,6 @@
 import com.sun.net.httpserver.*;
+import processing.core.PVector;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -18,6 +20,10 @@ public class Webserver {
         public void handle(HttpExchange t) throws IOException {
             Map <String,String>parms = Webserver.queryToMap(t.getRequestURI().getQuery());
             String response = "<h1>X:" + parms.get("x") + "<br>Y:" + parms.get("y") + "</h1>";
+            int x = Integer.parseInt(parms.get("x"));
+            int y = Integer.parseInt(parms.get("y"))
+            PVector vector = new PVector(x,y);
+
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());

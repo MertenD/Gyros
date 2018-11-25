@@ -31,4 +31,8 @@ public class Main extends PApplet {
     public void mousePressed() {
         balls.get(0).applyForce(new PVector(5,0));
     }
+
+    public void setBallForce(PVector vector){
+         ball.applyForce(vector);
+    }
 }
