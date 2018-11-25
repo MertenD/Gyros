@@ -1,3 +1,4 @@
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_EXCLUSIONPeer;
 import processing.core.PApplet;
 import processing.core.PVector;
 import java.util.ArrayList;
@@ -5,9 +6,18 @@ import java.util.ArrayList;
 public class Main extends PApplet {
 
     ArrayList<Ball> balls = new ArrayList<>();
+    static PVector forcevector = new PVector(0,0);
+    static Webserver server = new Webserver();
 
     public static void main(String[] args) {
         PApplet.main("Main");
+        System.out.println("MAIN CLASS");
+        try{
+            server.main(new String[]{});
+        }catch(Exception e){
+            System.out.println("ERROR");
+        }
+
     }
 
     public void settings() {
@@ -15,7 +25,7 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        balls.add(new Ball(this, new PVector(30, 30), new PVector(450,450), 10));
+        balls.add(new Ball(this, new PVector(30, 30), new PVector(450,450)));
     }
 
     public void draw() {
@@ -25,14 +35,7 @@ public class Main extends PApplet {
         for (Ball b : balls) {
             b.update();
             b.display();
+            b.applyForce(forcevector);
         }
-    }
-
-    public void mousePressed() {
-        balls.get(0).applyForce(new PVector(5,0));
-    }
-
-    public void setBallForce(PVector vector){
-         ball.applyForce(vector);
     }
 }

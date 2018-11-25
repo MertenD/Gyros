@@ -21,8 +21,10 @@ public class Webserver {
             Map <String,String>parms = Webserver.queryToMap(t.getRequestURI().getQuery());
             String response = "<h1>X:" + parms.get("x") + "<br>Y:" + parms.get("y") + "</h1>";
             int x = Integer.parseInt(parms.get("x"));
-            int y = Integer.parseInt(parms.get("y"))
+            int y = Integer.parseInt(parms.get("y"));
             PVector vector = new PVector(x,y);
+            Main.forcevector = vector;
+            System.out.println(Main.forcevector.x + ", " + Main.forcevector.y);
 
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
