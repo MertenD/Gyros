@@ -15,7 +15,7 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        balls.add(new Ball(this, new PVector(30, 30), new PVector(450,450), 10));
+        balls.add(new Ball(this, new PVector(30, 30), new PVector(450,450)));
     }
 
     public void draw() {
@@ -26,9 +26,5 @@ public class Main extends PApplet {
             b.update();
             b.display();
         }
-    }
-
-    public void mousePressed() {
-        balls.get(0).applyForce(new PVector(5,0));
     }
 }
