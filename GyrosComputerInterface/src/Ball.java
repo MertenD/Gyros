@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.util.ArrayList;
+
 public class Ball  {
 
     private PApplet p;
@@ -12,6 +14,8 @@ public class Ball  {
 
     private final float VMAX = 5;
     private final float FRICTION_MULT = 0.95f;
+    private final float SENSIBILITY = 0.5f;
+    private final float DEADZONE = 1;
 
     public Ball(PApplet p, PVector size, PVector pos) {
         this.p = p;
@@ -41,7 +45,7 @@ public class Ball  {
     }
 
     public void applyForce(PVector force) {
-        acc.add(force);
+        acc.add(force.mult(SENSIBILITY));
     }
 
     public void applyFriction() {
@@ -64,7 +68,16 @@ public class Ball  {
         }
     }
 
-    private void createNewBall() {
-         //TODO Hier soll ein neues Ball Objekt in der Main Klasse erzeugt werden
+    public boolean isColliding(ArrayList<String[]> walls) {
+        for (String[] w : walls) {
+            if (pos.x <= Integer.parseInt(w[0])+Integer.parseInt(w[2]) ||
+                    pos.x >= Integer.parseInt(w[0])-size.x ||
+                    pos.y <= Integer.parseInt(w[1])+Integer.parseInt(w[3]) ||
+                    pos.y >= Integer.parseInt(w[4])-size.y) {
+
+                return true;
+            }
+        }
+        return false;
     }
 }

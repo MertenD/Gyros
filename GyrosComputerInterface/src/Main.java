@@ -6,8 +6,12 @@ import java.util.ArrayList;
 public class Main extends PApplet {
 
     ArrayList<Ball> balls = new ArrayList<>();
+
     static PVector forcevector = new PVector(0,0);
     static Webserver server = new Webserver();
+
+    Level level;
+
 
     public static void main(String[] args) {
         PApplet.main("Main");
@@ -26,6 +30,7 @@ public class Main extends PApplet {
 
     public void setup() {
         balls.add(new Ball(this, new PVector(30, 30), new PVector(450,450)));
+        level = new Level(this, "");
     }
 
     public void draw() {
@@ -35,7 +40,11 @@ public class Main extends PApplet {
         for (Ball b : balls) {
             b.update();
             b.display();
+
             b.applyForce(forcevector);
+
+            System.out.println(b.isColliding(level.walls));
+
         }
     }
 }
